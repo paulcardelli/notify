@@ -4,7 +4,7 @@
 <br>
 
 <h2>Notify me on inactive feeds</h2>
-<p>Receive an email notification when any feed become inactive for more than 24 hours</p>
+<p>Receive an email notification when any feed become inactive for more than 2 hours</p>
 
 <div class="input-prepend input-append">
   <span class="add-on">Send email to:</span>
@@ -13,7 +13,7 @@
   <button id="notifybtn" class="btn btn-primary" type="button">Enable</button>
 </div>
 
-<p><i>The server checks at the end of each day (midnight UTC).<br>Feeds that are historically inactive are ignored.</i></p>
+<p><i>The server checks for inactive feeds every 2 hours.<br>Feeds that are historically inactive are ignored.</i></p>
 
 <script>
   var path = "<?php echo $path; ?>";

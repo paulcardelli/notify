@@ -26,8 +26,8 @@ $mailer = Swift_Mailer::newInstance($transport);
 
 // 2) Determine feeds
 $now = time();
-$h24 = date("Y-n-j H:i:s", time() - (3600*24));
-$h48 = date("Y-n-j H:i:s", time() - (3600*24*2));
+$h24 = date("Y-n-j H:i:s", time() - (3600*2));
+$h48 = date("Y-n-j H:i:s", time() - (3600*4));
 $mysqli = new mysqli("localhost","username","password","database");
 $result = $mysqli->query("SELECT id,userid,name FROM feeds WHERE `time`>='$h48' AND `time`<='$h24';");
 
@@ -53,7 +53,7 @@ foreach ($users as $user)
     
     // Send an email
     
-    $body = "<p><b>Hello!</b></p><p>The following emoncms feeds have become inactive for more than 24 hours:</p><ul>";
+    $body = "<p><b>Hello!</b></p><p>The following emoncms feeds have become inactive for more than 2 hours:</p><ul>";
     foreach ($user['feeds'] as $feed)
     {
       $body .= "<li>".$feed."</li>";
