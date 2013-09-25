@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: emoncmsnotifier\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-25 21:38+0100\n"
-"PO-Revision-Date: 2013-09-25 21:38+0100\n"
+"POT-Creation-Date: 2013-09-25 21:51+0100\n"
+"PO-Revision-Date: 2013-09-25 21:51+0100\n"
 "Last-Translator: Troels Leegaard <tleegaard@gmail.com>\n"
 "Language-Team: \n"
 "Language: en_GB\n"
@@ -17,6 +17,47 @@ msgstr ""
 
 #: ../../../notify_menu.php:7
 msgid "Notify"
+msgstr ""
+
+#: ../../../notify_view.php:6
+msgid "Notify me on inactive feeds"
+msgstr ""
+
+#: ../../../notify_view.php:7
+msgid "Receive an email notification when any feed become inactive for more than 2 hours"
+msgstr ""
+
+#: ../../../notify_view.php:10
+msgid "Send email to:"
+msgstr ""
+
+#: ../../../notify_view.php:12
+msgid "Enabled!"
+msgstr ""
+
+#: ../../../notify_view.php:13
+#: ../../../notify_view.php:62
+msgid "Enable"
+msgstr ""
+
+#: ../../../notify_view.php:16
+msgid "The server checks for inactive feeds every 2 hours.<br>Feeds that are historically inactive are ignored."
+msgstr ""
+
+#: ../../../notify_view.php:32
+msgid "Enabled: "
+msgstr ""
+
+#: ../../../notify_view.php:38
+msgid "Sending email to: "
+msgstr ""
+
+#: ../../../notify_view.php:41
+msgid "ERROR: Please enter a valid email address"
+msgstr ""
+
+#: ../../../notify_view.php:57
+msgid "Disable"
 msgstr ""
 
 #: ../../../notify_model.php:44
