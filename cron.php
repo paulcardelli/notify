@@ -65,7 +65,7 @@ foreach ($users as $user)
     $message = Swift_Message::newInstance()
 
       // Give the message a subject
-      ->setSubject(count($user['feeds'])." _('emoncms feeds have become inactive')")
+      ->setSubject(count($user['feeds'])._("emoncms feeds have become inactive"))
 
       // Set the From address with an associative array
       ->setFrom(array('from@address.example' => 'Emoncms'))
