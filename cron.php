@@ -52,7 +52,7 @@ foreach ($keys as $key)
     $result = $mysqli->query("SELECT name, userid FROM feeds WHERE `id`='$feedid'");
     $row = $result->fetch_array();
     $userid = $row['userid'];
-    if (!isset($users[$row->userid])) $users[$userid] = array('id'=>$userid, 'feeds'=>array());
+    if (!isset($users[$row['userid']])) $users[$userid] = array('id'=>$userid, 'feeds'=>array());
     $users[$userid]['feeds'][] = $row['name'];
   }
 }
