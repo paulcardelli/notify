@@ -23,10 +23,21 @@ $redis->connect("127.0.0.1");
 
 // 1) Setup swift mailer transport 
 require_once 'swift_required.php';
+
+// Using the Mail Transport 
+$transport = Swift_MailTransport::newInstance();
+
+/*
+
+Use this if you wish to use smtp
+
 $transport = Swift_SmtpTransport::newInstance('mail.yourserver.com', 26)
   ->setUsername('username')
   ->setPassword('password')
 ;
+
+*/
+
 // Create the Mailer using your created Transport
 $mailer = Swift_Mailer::newInstance($transport);
 
@@ -86,7 +97,7 @@ foreach ($users as $user)
       ->setSubject(count($user['feeds'])._("emoncms feeds have become inactive"))
 
       // Set the From address with an associative array
-      ->setFrom(array('from@address.example' => 'Emoncms'))
+      ->setFrom(array('emoncms@mypi' => 'Emoncms PI'))
 
       // Set the To addresses with an associative array
       ->setTo(array($email))
