@@ -6,13 +6,20 @@
   ---------------------
 
   sudo apt-get install php-pear
-
   sudo pear channel-discover pear.swiftmailer.org
-
   sudo pear install swift/swift
 
 */
 
+define('EMONCMS_EXEC', 1);
+
+chdir("/var/www/emoncms");
+
+require "process_settings.php";
+$mysqli = @new mysqli($server,$username,$password,$database);
+
+$redis = new Redis();
+$redis->connect("127.0.0.1");
 
 // 1) Setup swift mailer transport 
 require_once 'swift_required.php';
@@ -23,20 +30,26 @@ $transport = Swift_SmtpTransport::newInstance('mail.yourserver.com', 26)
 // Create the Mailer using your created Transport
 $mailer = Swift_Mailer::newInstance($transport);
 
-
 // 2) Determine feeds
 $now = time();
-$h24 = date("Y-n-j H:i:s", time() - (3600*2));
-$h48 = date("Y-n-j H:i:s", time() - (3600*4));
-$mysqli = new mysqli("localhost","username","password","database");
-$result = $mysqli->query("SELECT id,userid,name FROM feeds WHERE `time`>='$h48' AND `time`<='$h24';");
+$h24 = $now - (3600*2);
+$h48 = $now - (3600*4);
+ 
+$keys = $redis->keys("feed:lastvalue:*");
 
 $users = array();
 
-while ($row = $result->fetch_object())
+foreach ($keys as $key)
 {
-  if (!isset($users[$row->userid])) $users[$row->userid] = array('id'=>$row->userid, 'feeds'=>array());
-  $users[$row->userid]['feeds'][] = $row->name;
+  $parts = explode(":",$key);
+  $feedid = $parts[2];
+  $time = strtotime($redis->hget("feed:lastvalue:$feedid","time"));
+  
+  if ($time>=$h48 && $time<=$h24)
+  {
+    if (!isset($users[$row->userid])) $users[$row->userid] = array('id'=>$row->userid, 'feeds'=>array());
+    $users[$row->userid]['feeds'][] = $row->name;
+  }
 }
 
 foreach ($users as $user)
