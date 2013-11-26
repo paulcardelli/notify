@@ -47,8 +47,13 @@ foreach ($keys as $key)
   
   if ($time>=$h48 && $time<=$h24)
   {
-    if (!isset($users[$row->userid])) $users[$row->userid] = array('id'=>$row->userid, 'feeds'=>array());
-    $users[$row->userid]['feeds'][] = $row->name;
+    // fetch userid
+    
+    $result = $mysqli->query("SELECT name, userid FROM feeds WHERE `id`='$feedid'");
+    $row = $result->fetch_array();
+    $userid = $row['userid'];
+    if (!isset($users[$row->userid])) $users[$userid] = array('id'=>$userid, 'feeds'=>array());
+    $users[$userid]['feeds'][] = $row['name'];
   }
 }
 
